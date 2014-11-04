@@ -15,12 +15,16 @@ from constants import CLOSED, SYN_RCVD, ESTABLISHED, SYN_SENT,\
                       LAST_ACK, CLOSING
 from packet import SYNFlag, ACKFlag, FINFlag
 
+from random import random
 
 class IncomingPacketHandler(object):
     
     def __init__(self, protocol):
         self.protocol = protocol
         self.socket = self.protocol.socket
+        
+        self.delay = None
+        self.packet_loss_rate = None
         
     def initialize_control_block_from(self, packet):
         self.protocol.initialize_control_block_from(packet)
@@ -34,6 +38,11 @@ class IncomingPacketHandler(object):
         
     def send_ack(self):
         ack_packet = self.build_packet()
+        if self.packet_loss_rate:
+            if random() < self.packet_loss_rate:
+              return
+        if self.delay:
+            sleep(self.delay)
         self.socket.send(ack_packet)
 
     def handle(self, packet):
@@ -181,3 +190,9 @@ class IncomingPacketHandler(object):
             
     def handle_incoming_on_closing(self, packet):
         self.set_closed_if_packet_acknowledges_fin(packet)
+        
+    def set_delay(self,delay):
+        self.delay = delay
+      
+    def set_packet_loss_rate(self,packet_loss_rate):
+        self.packet_loss_rate = packet_loss_rate

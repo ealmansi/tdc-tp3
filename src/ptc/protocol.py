@@ -55,7 +55,7 @@ class PTCProtocol(object):
         self.close_event = threading.Event()
         self.initialize_threads()
         self.initialize_timers()
-        
+
     def initialize_threads(self):
         self.packet_sender = PacketSender(self)
         self.packet_receiver = PacketReceiver(self)
@@ -346,3 +346,12 @@ class PTCProtocol(object):
         # close y free es luego invocada por algún otro thread.
         self.close_event.set()
         self.set_state(CLOSED)
+
+    def set_rto_parameters(self, alpha, beta):
+        self.rto_estimator.set_parameters(alpha, beta)
+
+    def set_delay(self, delay):
+        self.packet_handler.set_delay(delay)
+
+    def set_packet_loss_rate(self, packet_loss_rate):
+        self.packet_handler.set_packet_loss_rate(packet_loss_rate)

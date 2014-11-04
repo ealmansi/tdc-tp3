@@ -82,8 +82,8 @@ class RTOEstimator(object):
             # Tenemos por lo menos una muestra, por lo que actualizamos los
             # valores según el paso 2.2 del RFC.
             deviation = abs(self.srtt - sampled_rtt)
-            self.rttvar = (1 - BETA) * self.rttvar + BETA * deviation
-            self.srtt = (1 - ALPHA) * self.srtt + ALPHA * sampled_rtt
+            self.rttvar = (1 - self.beta) * self.rttvar + self.beta * deviation
+            self.srtt = (1 - self.alpha) * self.srtt + self.alpha * sampled_rtt
             
     def update_rto(self):
         self.rto = self.srtt + max(1, K * self.rttvar)

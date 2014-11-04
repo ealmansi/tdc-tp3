@@ -26,6 +26,8 @@ class RTOEstimator(object):
         self.protocol = protocol
         self.tracking = False
         self.lock = threading.RLock()
+        self.alpha = ALPHA
+        self.beta = BETA
     
     def get_current_rto(self):
         with self.lock:
@@ -90,3 +92,7 @@ class RTOEstimator(object):
         iss = self.protocol.iss
         seq_number = self.tracked_packet.get_seq_number() 
         return SequenceNumber.a_leq_b_leq_c(iss, seq_number, ack_number)
+
+    def set_parameters(self, alpha, beta):
+        self.alpha = alpha
+        self.beta = beta

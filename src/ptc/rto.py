@@ -85,6 +85,7 @@ class RTOEstimator(object):
             self.rttvar = (1 - self.beta) * self.rttvar + self.beta * deviation
             self.srtt = (1 - self.alpha) * self.srtt + self.alpha * sampled_rtt
             
+            
     def update_rto(self):
         self.rto = self.srtt + max(1, K * self.rttvar)
     

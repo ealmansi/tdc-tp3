@@ -14,7 +14,7 @@
 PROTOCOL_NUMBER = 202
 
 # Granularidad del reloj (en segundos)
-CLOCK_TICK = 0.01
+CLOCK_TICK = 0.001
 
 # Máximo SEQ/ACK y máximo tamaño de ventana
 MAX_SEQ = (1<<32) - 1

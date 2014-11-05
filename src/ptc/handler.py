@@ -16,13 +16,13 @@ from constants import CLOSED, SYN_RCVD, ESTABLISHED, SYN_SENT,\
 from packet import SYNFlag, ACKFlag, FINFlag
 
 from random import random
+from time import sleep
 
 class IncomingPacketHandler(object):
     
     def __init__(self, protocol):
         self.protocol = protocol
         self.socket = self.protocol.socket
-        
         self.delay = None
         self.packet_loss_rate = None
         

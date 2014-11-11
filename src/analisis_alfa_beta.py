@@ -10,7 +10,8 @@ import os
 def main():
   args = parse_args()
   datos = leer_entrada(args)
-  plot_alfa_beta(datos)
+  plot_alfa(datos[0])
+  plot_beta(datos[1])
   # filtrar_basura(datos)
 
 def parse_args():
@@ -20,44 +21,70 @@ def parse_args():
   return args
 
 def leer_entrada(args):
+  experimentos = []
   datos = []
-  datos_por_alfa_beta = []
-  i = 1
+  datos_por_experimento = []
+  i = -1
   with open(args.get('datafile')) as f:
     for line in f:
+      if i == -1:
+        cant_casos = int(line)
+        i+=1
+        continue
       if not re.match('^\s*#', line):
         if line == '\n':
-          datos.append(datos_por_alfa_beta)
-          datos_por_alfa_beta = []
+          datos.append(datos_por_experimento)
+          datos_por_experimento = []
+          if i % cant_casos == cant_casos-1:
+            experimentos.append(datos)
+            datos = []
+          i+=1
+          continue
+        if datos_por_experimento == []:
+          pieces = line.split()
+          datos_por_experimento.append((float(pieces[0].strip()),float(pieces[1].strip())))
+          datos_por_experimento.append([])
           continue
         pieces = line.split()
         sampled, rtt = float(pieces[0].strip()), float(pieces[1].strip())
-        datos_por_alfa_beta.append((sampled,rtt))
-  datos = [(d[0], d[1:]) for d in datos]
-  return datos
+        datos_por_experimento[1].append((sampled,rtt))
+  return experimentos
 
 # def filtar_basura(datos):
 #   for i in range(1,len(datos)):
 #     sampled, rtt = datos[i]
-# muestras = [((alpha,beta),[(sample1,rto1),....]),....]
-def plot_alfa_beta(muestras):
+def plot_alfa(muestras):
   f = plt.figure()
-  labels = ['0', '0.125','0.4','0.8','1','0', '0.25','0.5','0.8','1']
-  labels_handle = []
+  labels = [str(e[0][0]) for e in muestras]
   for i in range(len(muestras)):
-    alfa, beta = muestras[i][0]
     sampleds = [sampled/rto for (sampled, rto) in muestras[i][1]]
     #rtos = [rto for (sampled, rto) in muestras[i][1]]
     plt.plot(range(1, len(sampleds)-1),sampleds[1:len(sampleds)-1],label=labels[i])
 
-    if(i == 4 or i == len(muestras) - 1):
-      plt.title("ALPHA O BETA" + str(i), fontsize=18)
-      plt.ylabel("Tiempo (ms)", fontsize=18)
-      plt.legend()
-      #plt.legend(handler_map=()
-      #plt.show()
-      f.savefig('alpha' + str(i))
-      f = plt.figure()
+    
+  plt.title("Relacion Sample/RTO para distintos Alpha", fontsize=18)
+  plt.ylabel("Sampled/RTO", fontsize=18)
+  plt.legend()
+  #plt.legend(handler_map=()
+  #plt.show()
+  f.savefig('alpha')
+  
+def plot_beta(muestras):
+  f = plt.figure()
+  labels = [str(e[0][1]) for e in muestras]
+  for i in range(len(muestras)):
+    sampleds = [sampled/rto for (sampled, rto) in muestras[i][1]]
+    #rtos = [rto for (sampled, rto) in muestras[i][1]]
+    plt.plot(range(1, len(sampleds)-1),sampleds[1:len(sampleds)-1],label=labels[i])
+
+    
+  plt.title("Relacion Sample/RTO para distintos Beta", fontsize=18)
+  plt.ylabel("Sampled/RTO", fontsize=18)
+  plt.legend()
+  #plt.legend(handler_map=()
+  #plt.show()
+  f.savefig('beta')
+
 
 if __name__ == '__main__':
   main()

@@ -57,6 +57,7 @@ class PTCProtocol(object):
         self.initialize_timers()
         self.ack_drop_rate = None
         self.ack_delay = None
+        self.ack_delay_var = 0
         
     def initialize_threads(self):
         self.packet_sender = PacketSender(self)
@@ -352,8 +353,9 @@ class PTCProtocol(object):
     def set_ack_drop_rate(self, ack_drop_rate):
         self.ack_drop_rate = ack_drop_rate
 
-    def set_ack_delay(self, ack_delay):
+    def set_ack_delay(self, ack_delay, ack_delay_var=0):
         self.ack_delay = ack_delay
+        self.ack_delay_var = ack_delay_var
 
     def set_rto_estimation_parameters(self, alpha, beta):
         self.rto_estimator.set_rto_estimation_parameters(alpha, beta)

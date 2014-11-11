@@ -6,9 +6,9 @@ import ptc
 from tp3_config import SERVER_IP, SERVER_PORT, TRANSFER_DATA, TRANSFER_CHUNK_SIZE, TEST_RTO_PARAMS
 import time
 
-def receive_data(client_sock, ack_drop_rate = None, ack_delay = None):
+def receive_data(client_sock, ack_drop_rate = None, ack_delay = None, ack_delay_var = 0):
     client_sock.protocol.set_ack_drop_rate(ack_drop_rate)
-    client_sock.protocol.set_ack_delay(ack_delay)
+    client_sock.protocol.set_ack_delay(ack_delay,ack_delay_var)
     data_received = ''
     while len(data_received) < len(TRANSFER_DATA):
       chunk_size = min(len(TRANSFER_DATA) - len(data_received), TRANSFER_CHUNK_SIZE)

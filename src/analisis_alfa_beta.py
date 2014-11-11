@@ -10,6 +10,7 @@ import os
 def main():
 	args = parse_args()
 	datos = leer_entrada(args)
+  filtrar_basura(datos)
 
 def parse_args():
   parser = argparse.ArgumentParser(description='Tp3.')
@@ -34,6 +35,8 @@ def leer_entrada(args):
         datos_por_alfa_beta.append((sampled,rtt))
   return datos
 
+def filtar_basura(datos):
+  for i in range(1,len(datos)):
 
 if __name__ == '__main__':
   main()

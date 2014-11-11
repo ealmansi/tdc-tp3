@@ -55,7 +55,9 @@ class PTCProtocol(object):
         self.close_event = threading.Event()
         self.initialize_threads()
         self.initialize_timers()
-
+        self.ack_drop_rate = None
+        self.ack_delay = None
+        
     def initialize_threads(self):
         self.packet_sender = PacketSender(self)
         self.packet_receiver = PacketReceiver(self)
@@ -347,11 +349,11 @@ class PTCProtocol(object):
         self.close_event.set()
         self.set_state(CLOSED)
 
-    def set_rto_parameters(self, alpha, beta):
-        self.rto_estimator.set_parameters(alpha, beta)
+    def set_ack_drop_rate(self, ack_drop_rate):
+        self.ack_drop_rate = ack_drop_rate
 
-    def set_delay(self, delay):
-        self.packet_handler.set_delay(delay)
+    def set_ack_delay(self, ack_delay):
+        self.ack_delay = ack_delay
 
-    def set_packet_loss_rate(self, packet_loss_rate):
-        self.packet_handler.set_packet_loss_rate(packet_loss_rate)
+    def set_rto_estimation_parameters(self, alpha, beta):
+        self.rto_estimator.set_rto_estimation_parameters(alpha, beta)

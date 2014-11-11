@@ -14,17 +14,15 @@ from constants import CLOSED, SYN_RCVD, ESTABLISHED, SYN_SENT,\
                       LISTEN, FIN_WAIT1, FIN_WAIT2, CLOSE_WAIT,\
                       LAST_ACK, CLOSING
 from packet import SYNFlag, ACKFlag, FINFlag
-
 from random import random
 from time import sleep
+
 
 class IncomingPacketHandler(object):
     
     def __init__(self, protocol):
         self.protocol = protocol
         self.socket = self.protocol.socket
-        self.delay = None
-        self.packet_loss_rate = None
         
     def initialize_control_block_from(self, packet):
         self.protocol.initialize_control_block_from(packet)
@@ -38,12 +36,19 @@ class IncomingPacketHandler(object):
         
     def send_ack(self):
         ack_packet = self.build_packet()
-        if self.packet_loss_rate:
-            if random() < self.packet_loss_rate:
-              return
-        if self.delay:
-            sleep(self.delay)
-        self.socket.send(ack_packet)
+        self.drop_or_delay_and_send_ack(ack_packet)
+
+    def send_syn_ack(self):
+        syn_ack_packet = self.build_packet(flags=[SYNFlag, ACKFlag])
+        self.control_block.increment_snd_nxt()
+        self.drop_or_delay_and_send_ack(syn_ack_packet)
+
+    def drop_or_delay_and_send_ack(self, packet):
+        if self.protocol.ack_drop_rate and random() < self.protocol.ack_drop_rate:
+            return
+        if self.protocol.ack_delay:
+            sleep(self.protocol.ack_delay)
+        self.socket.send(packet)
 
     def handle(self, packet):
         state = self.protocol.state
@@ -80,10 +85,7 @@ class IncomingPacketHandler(object):
             destination_port = packet.get_source_port()
             self.protocol.set_destination_on_packet_builder(destination_ip,
                                                             destination_port)
-            syn_ack_packet = self.build_packet(flags=[SYNFlag, ACKFlag])
-            # El próximo byte que enviemos debe secuenciarse después del SYN.
-            self.control_block.increment_snd_nxt()
-            self.socket.send(syn_ack_packet)
+            self.send_syn_ack()
             
     def handle_incoming_on_syn_sent(self, packet):
         if SYNFlag not in packet or ACKFlag not in packet:
@@ -190,9 +192,3 @@ class IncomingPacketHandler(object):
             
     def handle_incoming_on_closing(self, packet):
         self.set_closed_if_packet_acknowledges_fin(packet)
-        
-    def set_delay(self,delay):
-        self.delay = delay
-      
-    def set_packet_loss_rate(self,packet_loss_rate):
-        self.packet_loss_rate = packet_loss_rate

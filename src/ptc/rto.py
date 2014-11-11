@@ -85,7 +85,6 @@ class RTOEstimator(object):
             self.rttvar = (1 - self.beta) * self.rttvar + self.beta * deviation
             self.srtt = (1 - self.alpha) * self.srtt + self.alpha * sampled_rtt
             
-            
     def update_rto(self):
         self.rto = self.srtt + max(1, K * self.rttvar)
     
@@ -94,6 +93,6 @@ class RTOEstimator(object):
         seq_number = self.tracked_packet.get_seq_number() 
         return SequenceNumber.a_leq_b_leq_c(iss, seq_number, ack_number)
 
-    def set_parameters(self, alpha, beta):
+    def set_rto_estimation_parameters(self, alpha, beta):
         self.alpha = alpha
         self.beta = beta

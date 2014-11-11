@@ -13,12 +13,14 @@ def main():
     with ptc.Socket() as client_sock:
         client_sock.connect((SERVER_IP, SERVER_PORT), timeout = 30)
         client_sock.shutdown(ptc.SHUT_WR)
+        client_sock.protocol.set_ack_drop_rate(0.05)
+        client_sock.protocol.set_ack_delay(0.01)
         data_received = ''
         while len(data_received) < len(TRANSFER_DATA):
           data_received += client_sock.recv(TRANSFER_CHUNK_SIZE)
           print len(data_received), ' out of ', len(TRANSFER_DATA), 'bytes received.\r',
         print ''
-        time.sleep(0.5)
+        time.sleep(1) # sin este sleep se queda bloqueado el server (??)
 
 if __name__ == '__main__':
     main()

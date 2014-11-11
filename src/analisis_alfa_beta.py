@@ -10,8 +10,12 @@ import os
 def main():
   args = parse_args()
   datos = leer_entrada(args)
-  plot_alfa(datos[0])
-  plot_beta(datos[1])
+  plot_alfa(datos[0],'var0')
+  plot_beta(datos[1],'var0')
+  plot_alfa(datos[2],'var.2')
+  plot_beta(datos[3],'var.2')
+  plot_alfa(datos[4],'var.5')
+  plot_beta(datos[5],'var.5')
   # filtrar_basura(datos)
 
 def parse_args():
@@ -53,7 +57,7 @@ def leer_entrada(args):
 # def filtar_basura(datos):
 #   for i in range(1,len(datos)):
 #     sampled, rtt = datos[i]
-def plot_alfa(muestras):
+def plot_alfa(muestras,name):
   f = plt.figure()
   labels = [str(e[0][0]) for e in muestras]
   for i in range(len(muestras)):
@@ -67,9 +71,9 @@ def plot_alfa(muestras):
   plt.legend()
   #plt.legend(handler_map=()
   #plt.show()
-  f.savefig('alpha')
+  f.savefig('alpha'+name)
   
-def plot_beta(muestras):
+def plot_beta(muestras,name=''):
   f = plt.figure()
   labels = [str(e[0][1]) for e in muestras]
   for i in range(len(muestras)):
@@ -83,7 +87,7 @@ def plot_beta(muestras):
   plt.legend()
   #plt.legend(handler_map=()
   #plt.show()
-  f.savefig('beta')
+  f.savefig('beta'+name)
 
 
 if __name__ == '__main__':

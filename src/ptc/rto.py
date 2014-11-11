@@ -68,6 +68,7 @@ class RTOEstimator(object):
                 return
             if self.ack_covers_tracked_packet(ack_packet.get_ack_number()):
                 sampled_rtt = self.protocol.get_ticks() - self.rtt_start_time
+                print 'sampled_rtt: ', sampled_rtt, 'self.rto: ', self.rto
                 self.update_rtt_estimation_with(sampled_rtt)
                 self.update_rto()
                 self.untrack()
@@ -94,5 +95,8 @@ class RTOEstimator(object):
         return SequenceNumber.a_leq_b_leq_c(iss, seq_number, ack_number)
 
     def set_rto_estimation_parameters(self, alpha, beta):
+        self.srtt = 0
+        self.rttvar = 0
+        self.rto = INITIAL_RTO
         self.alpha = alpha
         self.beta = beta

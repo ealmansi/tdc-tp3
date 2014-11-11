@@ -20,11 +20,11 @@ def main():
     if os.geteuid() != 0:
         exit("You need to have root privileges to run this script.\nPlease try again using 'sudo'. Exiting.")
 
-    for it in xrange(len(TEST_RTO_PARAMS)):
+    for (_,_,delay,delay_var,drop) in TEST_RTO_PARAMS:
         with ptc.Socket() as client_sock:
             print 'Client socket open.'
             client_sock.connect((SERVER_IP, SERVER_PORT), timeout = 30)
-            receive_data(client_sock, None, 0.01)
+            receive_data(client_sock, drop, delay,delay_var)
             time.sleep(1)
         print 'Client socket closed.'
 

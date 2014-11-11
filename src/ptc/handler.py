@@ -47,7 +47,7 @@ class IncomingPacketHandler(object):
         if self.protocol.ack_drop_rate and random() < self.protocol.ack_drop_rate:
             return
         if self.protocol.ack_delay:
-            sleep(self.protocol.ack_delay)
+            sleep(gauss(self.protocol.ack_delay,self.protocol.ack_delay*0.2))
         self.socket.send(packet)
 
     def handle(self, packet):

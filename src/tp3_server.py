@@ -20,8 +20,8 @@ def send_data(server_sock, alpha, beta):
 def main():
     if os.geteuid() != 0:
         exit("You need to have root privileges to run this script.\nPlease try again using 'sudo'. Exiting.")
-    print len(TEST_RTO_PARAMS) / 2
-    for (alpha, beta) in TEST_RTO_PARAMS:
+    print 5
+    for (alpha, beta,_,_,_) in TEST_RTO_PARAMS:
         with ptc.Socket() as server_sock:
             #print 'Server socket open.'
             server_sock.bind((SERVER_IP, SERVER_PORT))

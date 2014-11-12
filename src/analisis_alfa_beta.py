@@ -10,12 +10,13 @@ import os
 def main():
   args = parse_args()
   datos = leer_entrada(args)
+  print len(datos)
   plot_alfa(datos[0],'var0')
   plot_beta(datos[1],'var0')
-  plot_alfa(datos[2],'var.2')
-  plot_beta(datos[3],'var.2')
-  plot_alfa(datos[4],'var.5')
-  plot_beta(datos[5],'var.5')
+  plot_alfa(datos[2],'var2')
+  plot_beta(datos[3],'var2')
+  plot_alfa(datos[4],'var5')
+  plot_beta(datos[5],'var5')
   # filtrar_basura(datos)
 
 def parse_args():

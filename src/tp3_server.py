@@ -21,10 +21,12 @@ def main():
     if os.geteuid() != 0:
         exit("You need to have root privileges to run this script.\nPlease try again using 'sudo'. Exiting.")
     print 5
+    port = SERVER_PORT
     for (alpha, beta,_,_,_) in TEST_RTO_PARAMS:
         with ptc.Socket() as server_sock:
             #print 'Server socket open.'
-            server_sock.bind((SERVER_IP, SERVER_PORT))
+            server_sock.bind((SERVER_IP, port))
+            port = port + 1
             server_sock.listen()
             server_sock.accept(timeout = 30)
             print '%f %f' % (alpha, beta)

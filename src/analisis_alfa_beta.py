@@ -11,6 +11,13 @@ def main():
   args = parse_args()
   datos = leer_entrada(args)
   print len(datos)
+ # losdatos = []
+ # for i in range(6):
+ #   losdatos.append(datos[0])
+ #   losdatos.append(datos[1])
+    
+ # datos = losdatos
+ # print len(datos)
   labels = []
   for delay in ['01','025']:
     for delayvar in ['2', '5']:

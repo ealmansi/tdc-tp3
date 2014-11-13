@@ -8,6 +8,10 @@ import time
 
 def send_data(server_sock, alpha, beta):
   server_sock.protocol.set_rto_estimation_parameters(alpha, beta)
+  server_sock.protocol.srtt = 0
+  server_sock.protocol.rttvar = 0
+  server_sock.protocol.rto = INITIAL_RTO
+    
   data_index = 0
   while data_index < len(TRANSFER_DATA):
     chunk_size = min(len(TRANSFER_DATA) - data_index, TRANSFER_CHUNK_SIZE)
@@ -22,13 +26,13 @@ def main():
         exit("You need to have root privileges to run this script.\nPlease try again using 'sudo'. Exiting.")
     print 5
     port = SERVER_PORT
-    for (alpha, beta,_,_,_) in TEST_RTO_PARAMS:
-        with ptc.Socket() as server_sock:
-            #print 'Server socket open.'
-            server_sock.bind((SERVER_IP, port))
-            port = port + 1
-            server_sock.listen()
-            server_sock.accept(timeout = 30)
+      with ptc.Socket() as server_sock:
+          #print 'Server socket open.'
+          server_sock.bind((SERVER_IP, port))
+          #port = port + 1
+          server_sock.listen()
+          server_sock.accept(timeout = 30)
+          for (alpha, beta,_,_,_) in TEST_RTO_PARAMS:
             print '%f %f' % (alpha, beta)
             send_data(server_sock, alpha, beta)
         #print 'Server socket closed.'

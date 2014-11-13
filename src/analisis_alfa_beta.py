@@ -19,10 +19,10 @@ def main():
         labels.append('d'+ delay +'var'+ delayvar +'drop'+ droprate)
    
   for i in range(len(datos)):
-  if i % 2 == 0:     
-    plot_alfa(datos[i],labels[i])
-  else:  
-    plot_beta(datos[i],labels[i])
+    if (i % 2 == 0):     
+      plot_alfa(datos[i],labels[i])
+    else:  
+      plot_beta(datos[i],labels[i])
       
   # filtrar_basura(datos)
 

@@ -11,12 +11,19 @@ def main():
   args = parse_args()
   datos = leer_entrada(args)
   print len(datos)
-  plot_alfa(datos[0],'var0drop70')
-  plot_beta(datos[1],'var0drop70')
-  plot_alfa(datos[2],'var2drop70')
-  plot_beta(datos[3],'var2drop70')
-  plot_alfa(datos[4],'var5drop70')
-  plot_beta(datos[5],'var5drop70')
+  labels = []
+  for delay in ['01','025']:
+    for delayvar in ['2', '5']:
+      for droprate in [ '0', '25', '50']:
+        labels.append('d'+ delay +'var'+ delayvar +'drop'+ droprate)
+        labels.append('d'+ delay +'var'+ delayvar +'drop'+ droprate)
+   
+  for i in range(len(datos)):
+  if i % 2 == 0:     
+    plot_alfa(datos[i],labels[i])
+  else:  
+    plot_beta(datos[i],labels[i])
+      
   # filtrar_basura(datos)
 
 def parse_args():
@@ -47,7 +54,7 @@ def leer_entrada(args):
           continue
         if datos_por_experimento == []:
           pieces = line.split()
-          datos_por_experimento.append((float(pieces[0].strip()),float(pieces[1].strip())))
+          datos_por_experimento.append((float(pieces[0].strip()),float(pieces[1].strip()),float(pieces[2].strip()),float(pieces[3].strip()),float(pieces[4].strip())))
           datos_por_experimento.append([])
           continue
         pieces = line.split()

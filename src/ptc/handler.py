@@ -46,7 +46,7 @@ class IncomingPacketHandler(object):
     def drop_or_delay_and_send_ack(self, packet):
         if self.protocol.ack_drop_rate and random() < self.protocol.ack_drop_rate:
             return
-        delay_and_send_ack(packet)
+        self.delay_and_send_ack(packet)
 
     def delay_and_send_ack(self,packet):
         if self.protocol.ack_delay:

@@ -1,0 +1,34 @@
+En este trabajo práctico, tomamos como punto de partida el código suministrado por la cátedra e implementamos modificaciones al protocolo PTC. Luego, generaremos un escenario de análisis sobre el que estudiaremos qué parámetros $\alpha$, $\beta$ optimizan el cálculo del RTO. La relación entre estos valores la mostramos a continuación.
+
+Para cada RTT muestreado (usando el algoritmo de Karn):
+
+\indent \indent $RTTVAR = (1-\beta) * RTTVAR + \beta * |SRTT-RTT|$
+
+\indent \indent $SRTT = (1-\alpha) * SRTT + \alpha * RTT$
+
+\indent \indent $RTO = SRTT + max (1,K * RTTVAR)$
+
+Las modificaciones que realizamos son: Introducir delay al momento de enviar los ACKs, y definir una probabilidad $p$ de pérdida de paquetes. Estas modificaciones las realizamos para poder simular las condiciones de una red real, donde puede haber pérdida de paquetes y delay al momento de enviar ACKs.
+
+Por otro lado, definimos un esquema cliente-servidor en el que el cliente envía datos y el servidor sólo los reconoce. Para distintas combinaciones de $\alpha$ y $\beta$, vamos a analizar cómo evoluciona la estimación del RTO. Así como también, vamos a analizar como influye el agregado de delay y pérdida de paquetes.
+
+\subsection{Problemas encontrados}
+
+\subsection{Experimentos realizados}
+Experimentamos variando los valores de $\alpha$ y $\beta$ en distintas condiciones de red, teniendo en cuenta tanto el delay de los ACKs como la pérdida de paquetes.
+
+%TODO ver como hicimos lo del delay
+
+Para simular el delay en una red, utilizamos ....
+ 
+Cuando hablamos de varianza baja ....
+ 
+Para simular la pérdida de paquetes en una red, definimos una probabilidad $p$ de pérdida de paquetes. Para decidir si éste será efectivamente enviado “tiramos una moneda” con dicha probabilidad. En la experimentación, variamos dicho $p$ de la siguiente manera:
+
+\begin{itemize}
+ \item Sin pérdida de paquetes: En este caso, utilizamos $p$ = 0 ya que no hay pérdida. 
+ \item Pérdida de paquetes baja: En este caso, utilizamos $p$ = 0,30.
+ \item Pérdida de paquetes alta: En este caso, utilizamos $p$ = 0,70.
+\end{itemize}
+
+Las condiciones de red habladas en esta sección, las realizamos para simular distintas posibles redes. Por ejemplo, una red con pérdida de paquetes alta simula una red con un nivel de congestión elevado.

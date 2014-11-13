@@ -47,7 +47,7 @@ def leer_entrada(args):
           continue
         if datos_por_experimento == []:
           pieces = line.split()
-          datos_por_experimento.append((float(pieces[0].strip()),float(pieces[1].strip())))
+          datos_por_experimento.append((float(pieces[0].strip()),float(pieces[1].strip()),float(pieces[2].strip()),float(pieces[3].strip()),float(pieces[4].strip())))
           datos_por_experimento.append([])
           continue
         pieces = line.split()

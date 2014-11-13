@@ -11,12 +11,12 @@ def main():
   args = parse_args()
   datos = leer_entrada(args)
   print len(datos)
-  plot_alfa(datos[0],'var0')
-  plot_beta(datos[1],'var0')
-  plot_alfa(datos[2],'var2')
-  plot_beta(datos[3],'var2')
-  plot_alfa(datos[4],'var5')
-  plot_beta(datos[5],'var5')
+  plot_alfa(datos[0],'var0drop70')
+  plot_beta(datos[1],'var0drop70')
+  plot_alfa(datos[2],'var2drop70')
+  plot_beta(datos[3],'var2drop70')
+  plot_alfa(datos[4],'var5drop70')
+  plot_beta(datos[5],'var5drop70')
   # filtrar_basura(datos)
 
 def parse_args():
@@ -72,7 +72,7 @@ def plot_alfa(muestras,name):
   plt.legend()
   #plt.legend(handler_map=()
   #plt.show()
-  f.savefig('alpha'+name)
+  f.savefig('../graficos/alpha'+name)
   
 def plot_beta(muestras,name=''):
   f = plt.figure()
@@ -88,7 +88,7 @@ def plot_beta(muestras,name=''):
   plt.legend()
   #plt.legend(handler_map=()
   #plt.show()
-  f.savefig('beta'+name)
+  f.savefig('../graficos/beta'+name)
 
 
 if __name__ == '__main__':

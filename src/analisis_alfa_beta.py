@@ -11,7 +11,7 @@ def main():
   args = parse_args()
   datos = leer_entrada(args)
   print len(datos)
-  losdatos = []
+ # losdatos = []
  # for i in range(12):
  #   losdatos.append(datos[0])
  #   losdatos.append(datos[1])

@@ -5,7 +5,7 @@ imprimir_comando(){
     local droprate=$4
     local delay=$5
     local delayvar=$6
-    echo "echo \"$alpha $beta $droprate $delay $delayvar\" > salida/$port.txt && (sudo ./tp3_server.py $port $droprate $delay $delayvar &) && sleep 3 && (sudo ./tp3_client.py $port $alpha $beta >> salida/$port.txt) && sleep 3 && sudo killall python"
+    echo "echo \"$alpha $beta $droprate $delay $delayvar\" > salida/$port.txt && (sudo ./tp3_server.py $port $droprate $delay $delayvar &) && sleep 3 && (sudo ./tp3_client.py $port $alpha $beta >> salida/$port.txt)"
 }
 
 port=5000

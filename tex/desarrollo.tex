@@ -14,7 +14,7 @@ Las modificaciones que realizamos son: Introducir delay al momento de enviar los
 
 Por otro lado, definimos un esquema cliente-servidor en el que el cliente envía datos y el servidor sólo los reconoce. Para distintas combinaciones de $\alpha$ y $\beta$, vamos a analizar cómo evoluciona la estimación del RTO. Así como también, vamos a analizar como influye el agregado de delay y pérdida de paquetes.
 
-Para simular el delay en una red, utilizamos dos variables ($media$ y $varianza$) para que el delay sea variable en las distintas transmisiones del mismo experimento. Introducimos dicho delay utilizando una distribución normal y como su nombre lo indica, $media$ y $varianza$ son las variables usadas en dicha distribución. Creemos que efectivamente la curva de distribución normal se corresponde con la variabilidad del delay en una red real.
+Para simular el delay en una red, utilizamos dos variables ($media$ y $varianza$) para que el delay sea variable en las distintas transmisiones del mismo experimento. Introducimos dicho delay utilizando una distribución normal y como su nombre lo indica, $media$ y $varianza$ son las variables usadas en dicha distribución. Creemos que efectivamente la curva de distribución normal se asemeja m\'as a la variabilidad del delay en una red real.
 
 Para simular la pérdida de paquetes en una red, definimos una probabilidad $p$ para dicha pérdida. Para decidir si éste será efectivamente enviado “tiramos una moneda” con dicha probabilidad $p$.
 
@@ -27,8 +27,8 @@ En la experimentación, al utilizar delay vamos a utilizar la siguiente nomencla
 \begin{itemize}
  \item Varianza baja: En este caso, $varianza$ = 0,2
  \item Varianza alta: En este caso, $varianza$ = 0,5
- \item Media baja: En este caso, $media$ = 0,01 (10 ms)
- \item Media alta: En este caso, $media$ = 0,025 (25 ms)
+ \item Delay baja: En este caso, $media$ = 0,01 (10 ms)
+ \item Delay alta: En este caso, $media$ = 0,025 (25 ms)
 \end{itemize}
  
 Además, para la pérdida de paquetes variamos la probabilidad $p$ de la siguiente manera:

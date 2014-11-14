@@ -1,0 +1,11 @@
+%TODO falta terminar, te lo pusheo para que veas que fuimos haciendo
+
+En esta sección vamos a discutir acerca de los resultados expuestos en la sección de Resultados.
+
+Observamos que en los gráficos donde la probabilidad de pérdida de paquetes es 0, la cantidad de re-transmisiones es similar para distintas corridas. Esto se debe a que al no haber \emph{dropeos}, se re-envía solamente por \emph{timeout}.
+
+Análogamente, cuando \emph{delay} y la varianza son altos, la cantidad de re-transmisiones en las distintas corridas no son similares sino que hay mucha variabilidad.
+
+Con respecto a $\alpha$, observamos que cuando es 0 la aproximación del \emph{Sampled RTT} respecto al RTO suele ser considerablemente peor respecto del resto de las corridas. Esto lo evidenciamos, por ejemplo, en la Figura \ref{fig:alpha-var0-drop0}.
+
+Esto no ese cumple, por ejemplo, cuando tenemos varianza y delay y pérdida de paquetes alto (como podemos ver en la Figura \ref{fig:alpha-var5-drop50-alto}). En estos casos, la relación del \emph{Sampled RTT} respecto del RTO no es buena para ningún $\alpha$. Estos casos los relacionamos con redes reales no estables.

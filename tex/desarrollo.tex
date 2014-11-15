@@ -25,6 +25,8 @@ Al realizar el trabajo nos encontramos con una serie de problemas que dificultar
 Primero encontramos un comportamiento an\'omalo en la medici\'on del RTT por parte del protocolo. Cuando por ejemplo gener\'abamos un delay de 500 ms en la red, el RTT medido por el protocolo suele tomar valores entre 45 y 55 ticks (en centisegundo). La mitad de ese rango son valores ``imposibles'' ya que generamos un delay m\'inimo de 50 ticks. 
 Encontramos que esta era a causa de la forma en que el protocolo mide el tiempo, generando un \emph{thread} que hace sleep por 0.01 segundos. Esta forma de medici\'on del tiempo genera un gran error, como pudimos observar en las mediciones.
 
+Suponemos que este error es el que genera la poca diferencia que encontramos en los experimentos. Lo que causa que sea dif\'icil sacar conclusiones de las mediciones.
+
 Por otro lado la primer y la \'ultima medici\'on que se usan para estimar, suelen valer o 1 o 0. Lo cual es m\'as que an\'omalo. Suponemos que este comportamiento tiene que ver con el inicio y el cierre de las conexiones de PTC. Pero no logramos encontrar el problema.
 
 Adem\'as, cuando quisimos automatizar los experimentos, nos topamos con el problema de que al correr en serie el cliente y el servidor, cada tanto no logran conectarse generando un \emph{timeout} en la conexi\'on. Lo cual nos dificult\'o en gran medida la realizaci\'on del trabajo pr\'actico.

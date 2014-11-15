@@ -22,4 +22,9 @@ En la Figura \ref{fig:alpha-var2-drop25-alto}, como tenemos poca varianza, por m
 
 En esta sección, estuvimos excluyendo a $\alpha$ = 0 y vamos a explicar a continuación por qué lo hicimos. Cuando $\alpha$ es 0, según el Algoritmo de Karn, el SRTT se mantiene fijo a lo largo de las distintas iteraciones de estimación de RTT. Recordamos, que el valor inicial de SRTT se define en la primer muestra como RTT. Esto implica, que en cada iteración, el SRTT no se modifica por más que el RTT varíe mucho.
 
+Observamos que, cuando la varianza es baja por lo general los valores de $\alpha$ 0,125 y 0,2 se comportan lo suficientemente bien. Creemos que esto sucede, ya que cuando la varianza es baja es posible estimar el RTT debido a que justamente, las estimaciones parciales de RTT son similares al RTT real. Estos valores pertenecen a los valores recomendados en el Peterson\footnote{Computer Networks: A Systems Approach, Larry L. Peterson and Bruce S. Davie. Tercera edición.}.
+
+Sin embargo, cabe aclarar que cuando tenemos varianza alta estimar el RTT se vuelve difícil ya que en cada muestra, el RTT estimado puede ser muy distinto a la anterior. Por consiguiente no hay ningún valor de $\alpha$ lo suficientemente bueno.
+%TODO emilio pone la footnote de Peterson!
+
 %TODO falta beta

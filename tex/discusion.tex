@@ -23,3 +23,5 @@ En la Figura \ref{fig:alpha-var2-drop25-alto}, como tenemos poca varianza, por m
 En esta sección, estuvimos excluyendo a $\alpha$ = 0 y vamos a explicar a continuación por qué lo hicimos. Cuando $\alpha$ es 0, según el Algoritmo de Karn, el SRTT se mantiene fijo a lo largo de las distintas iteraciones de estimación de RTT. Recordamos, que el valor inicial de SRTT se define en la primer muestra como RTT. Esto implica, que en cada iteración, el SRTT no se modifica por más que el RTT varíe mucho.
 
 %TODO falta beta
+
+Para beta, podemos ver que en los casos donde la p\'erdida de paquetes es nula, todos los betas terminan convergiendo a 1. Como se ve en la Figura \ref{fig:beta-var2-drop0}. $\beta$ = 0 converge por arriba, mientras todos los demas convergen por abajo. Vemos que \beta = 0

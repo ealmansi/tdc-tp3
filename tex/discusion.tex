@@ -30,4 +30,8 @@ Sin embargo, cabe aclarar que cuando tenemos varianza alta estimar el RTT se vue
 
 A partir de ahora, vamos a analizar la estimación del RTT respecto de $\beta$.
 
-Observamos que, en general, la probabilidad de pérdida de paquetes suele ser un factor determinante al momento de estimar el RTT. Podemos ver que en gráficos donde dicha probabilidad es baja, los distintos $\alpha$ usados aproximan bastante bien al RTT. Esto lo podemos ver en la Figura \ref{fig:alpha-var2-drop0}.
+Observamos que, en general, la probabilidad de pérdida de paquetes suele ser un factor determinante al momento de estimar el RTT también con respecto a $\beta$. Podemos ver que en gráficos donde dicha probabilidad es baja, los distintos $\beta$ usados aproximan bastante bien al RTT. Esto lo podemos ver en la Figura \ref{fig:beta-var2-drop0}.
+
+Una vez más, no ese cumple cuando tenemos varianza, \emph{delay} y una probabilidad de pérdida de paquetes alto (como podemos ver en la Figura \ref{fig:beta-var5-drop50-alto}). En estos casos, la relación del \emph{Sampled RTT} respecto del RTO no es buena para ningún $\beta$, y en particular, las estimaciones del RTT son más parecidas que en los casos anteriores. 
+
+Nuevamente, estos últimos casos los relacionamos con redes reales no estables. Mientras que casos donde la varianza es baja, y la probabilidad de pérdida de paquetes es baja, las relacionamos con redes reales estables.

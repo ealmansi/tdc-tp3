@@ -2,10 +2,24 @@
 
 En esta sección vamos a discutir acerca de los resultados expuestos en la sección de Resultados.
 
-Observamos que en los gráficos donde la probabilidad de pérdida de paquetes es 0, la cantidad de re-transmisiones es similar para distintas corridas. Esto se debe a que al no haber \emph{dropeos}, se re-envía solamente por \emph{timeout}.
+% Observamos que en los gráficos donde la probabilidad de pérdida de paquetes es 0, la cantidad de re-transmisiones es similar para distintas corridas. Esto se debe a que al no haber \emph{dropeos}, se re-envía solamente por \emph{timeout}.
+% 
+% Análogamente, cuando \emph{delay} y la varianza son altos, la cantidad de re-transmisiones en las distintas corridas no son similares sino que hay mucha variabilidad.
 
-Análogamente, cuando \emph{delay} y la varianza son altos, la cantidad de re-transmisiones en las distintas corridas no son similares sino que hay mucha variabilidad.
+Con respecto a $\alpha$, observamos que cuando es 0 la aproximación del \emph{Sampled RTT} respecto al RTO suele ser considerablemente peor respecto del resto de las corridas. Esto lo evidenciamos, por ejemplo, en la Figura \ref{fig:alpha-var2-drop0}.
 
-Con respecto a $\alpha$, observamos que cuando es 0 la aproximación del \emph{Sampled RTT} respecto al RTO suele ser considerablemente peor respecto del resto de las corridas. Esto lo evidenciamos, por ejemplo, en la Figura \ref{fig:alpha-var0-drop0}.
+Esto no ese cumple, por ejemplo, cuando tenemos varianza, \emph{delay} y una probabilidad de pérdida de paquetes alto (como podemos ver en la Figura \ref{fig:alpha-var5-drop50-alto}). En estos casos, la relación del \emph{Sampled RTT} respecto del RTO no es buena para ningún $\alpha$. 
 
-Esto no ese cumple, por ejemplo, cuando tenemos varianza y delay y pérdida de paquetes alto (como podemos ver en la Figura \ref{fig:alpha-var5-drop50-alto}). En estos casos, la relación del \emph{Sampled RTT} respecto del RTO no es buena para ningún $\alpha$. Estos casos los relacionamos con redes reales no estables.
+Estos últimos casos los relacionamos con redes reales no estables. Mientras que casos donde la varianza es baja, y la probabilidad de pérdida de paquetes es baja, las relacionamos con redes reales estables.
+
+Observamos que, en general, la probabilidad de pérdida de paquetes suele ser un factor determinante al momento de estimar el RTT. Podemos ver que en gráficos donde dicha probabilidad es baja, los distintos $\alpha$ usados aproximan bastante bien al RTT (a excepción de $\alpha$ = 0). Esto lo podemos ver en la Figura \ref{fig:alpha-var2-drop0}.
+
+Análogamente, en las Figuras \ref{fig:alpha-var2-drop25} y \ref{fig:alpha-var2-drop50} podemos observar que a medida que crece la probabilidad de pérdida de paquetes, aumenta la volatilidad de los RTOs para todos los $\alpha$.
+
+Sin embargo, cabe aclarar que otro factor importante es la varianza. Aún más, creemos que la varianza es un factor más importante que el \emph{delay} al momento de estimar el RTT. En las Figuras \ref{fig:alpha-var2-drop25-alto} (Varianza baja, \emph{delay} alto) y \ref{fig:alpha-var5-drop25} (Varianza alta, \emph{delay} bajo), podemos evidenciar justamente esto.
+
+En la Figura \ref{fig:alpha-var2-drop25-alto}, como tenemos poca varianza, por más que el \emph{delay} sea alto, podemos estimar relativamente bien el RTT (con la excepción de $\alpha$ = 0). En contraposición, en la Figura \ref{fig:alpha-var5-drop25}, como la varianza es alta, obtenemos  muchos picos en el cálculo de la estimación del RTT. En dichas figuras, podemos observar que nos cuesta más estimar el RTT, teniendo varianza alta y delay bajo que en el caso opuesto.
+
+En esta sección, estuvimos excluyendo a $\alpha$ = 0 y vamos a explicar a continuación por qué lo hicimos. Cuando $\alpha$ es 0, según el Algoritmo de Karn, el SRTT se mantiene fijo a lo largo de las distintas iteraciones de estimación de RTT. Recordamos, que el valor inicial de SRTT se define en la primer muestra como RTT. Esto implica, que en cada iteración, el SRTT no se modifica por más que el RTT varíe mucho.
+
+%TODO falta beta

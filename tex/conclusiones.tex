@@ -1,6 +1,6 @@
-Para concluir, nos parece importante recalcar que ningun par de valores de $\alpha$ y $\beta$ es estrictamente mejor que todas las demás. Sin embargo, podemos asegurar que usando valores de $\alpha$ cercanos a 0,125 y $\beta$ cercanos a 0,25 obtuvimos un RTO cercano al \emph{sampled RTT}. Esto confirma que los valores elegidos en el algoritmo de Karn son lo suficientemente buenos.
+Para concluir, nos parece importante recalcar que ningun par de valores de $\alpha$ y $\beta$ es estrictamente mejor que todas las demás. Sin embargo, podemos asegurar que definitivamente no tiene sentido usar $\alpha$ igual a 0.
 
-Otro punto que concluimos es que estos valores de $\alpha$ y $\beta$ siguen estimando el RTT lo suficientemente bien, aún cuando en la red hay delay y/o pérdida de paquetes altas.
+Otro punto que concluimos es que los valores de $\alpha$ = 0,125 y $\beta$ = 0,25 estiman el RTT lo suficientemente bien, especialmente cuando en la red hay delay y pérdida de paquetes bajas. Creemos que por esta razon, son los números elegidos como base en el algoritmo de Karn.
 
 % Para finalizar, queremos 
 
